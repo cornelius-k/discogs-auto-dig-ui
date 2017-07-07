@@ -1,0 +1,62 @@
+#logo {
+  font-size: 1vw;
+  color: #7bffcd;
+  margin: 0;
+  padding-top: 10px;
+  background: #616161;
+  height: 10vw;
+}
+
+#logo pre {
+  margin:0;
+}
+
+#SearchBox {
+  height: 6vw;
+  width: 100%;
+}
+
+#SearchBox input {
+  width: calc(100% - 5vw);
+  border: none;
+  font-size: 2.5vw;
+  -webkit-style:none;
+  margin: 0;
+  padding: 0;
+  margin-left: 5vw;
+  margin-top:7px;
+  height: 4vw;
+  color: #616161;
+  margin-top: 1vw;
+}
+
+#SearchBox input:focus{
+  outline:none;
+}
+
+::-webkit-input-placeholder{
+  color: #9c9c9c;
+}
+#SearchBox, #SearchBox input {
+  background-color: #7bffcd;
+}
+
+#RecordsList ul {
+  padding:0;
+  margin-top: 50px;
+}
+#RecordsList li {
+  list-style-type: none;
+  padding-left: 5vw;
+  cursor: pointer;
+  font-weight: lighter;
+  font-size: 14px;
+}
+
+#RecordsList li:hover {
+  background: yellow;
+}
+
+#main-left{
+  width: 45vw;
+}
