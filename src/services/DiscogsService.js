@@ -8,6 +8,7 @@ const rp = require('request-promise');
 // Discogs API pagination maximum number of results per page
 const MAX_PER_PAGE = 100;
 const USER_AGENT = 'DiscogsAutoDig/0.1 +http://discogsautodig.com';
+
 class DiscogsService{
 
   /**
