@@ -7,7 +7,8 @@ class RecordsList extends React.Component{
   render(){
     // build an array of li elements
     let records = this.props.records.map((each, i) => {
-      return <li key={i}>{each.release.description}</li>
+      if(each.release)
+        return <li key={i}>{each.release.description}</li>
     });
 
     return(

@@ -1,6 +1,9 @@
 import request from 'request';
-import DiscogsService from '../DiscogsService.js';
+import DiscogsService from '../services/DiscogsService.js';
 const inventoryResponses = require('./__mocks__/inventoryResponses.json');
+
+let testUsername = 'testUser';
+
 
 /**
  * Ensure discogs API is available, requires network
