@@ -41,18 +41,19 @@ describe('Make Request', () => {
  */
 describe('Inventory', () => {
 
+    // shared between tests
     let testInventorySize = 0;
+    let allListings = 0;
 
-    // use generator to handle single and multi-page requests
+    // use generator to simulate paginated API responses
     function* createInvResponseGenerator(){
-      // simulate paginated repsonses
       yield(inventoryResponses[0]);
       yield(inventoryResponses[1]);
     }
 
     beforeEach(() => {
-      // reset mock response generator and
       let invResponseGenerator = createInvResponseGenerator();
+
       // redirect outgoing requests to mock data generator
       DiscogsService.makeRequest = async function(){
         return invResponseGenerator.next().value;
@@ -60,25 +61,32 @@ describe('Inventory', () => {
     });
 
     it('can be requested for a test user', () => {
-      DiscogsService.getInventory(testUsername)
+      // request inventory and save inventory size for other tests
+      return DiscogsService.getInventory(testUsername)
       .then(inventoryResponse => {
         expect(inventoryResponse).toHaveProperty('pagination');
-        //save inventory size for other tests
         testInventorySize = inventoryResponse.pagination.items;
       })
       .catch(err => expect(err).toBeNull())
     })
 
     it('can be retrieved in full for a test user', () => {
+      // check that complete inventory is the correct size
       return DiscogsService.getCompleteInventory(testUsername)
       .then(allListings => {
         expect(allListings).toBeInstanceOf(Array);
-        //check against saved expected full inventory size
         expect(allListings.length === testInventorySize);
       })
       .catch(err => {
         expect(err).toBeNull();
       });
+    });
+
+    it('can organize a set of listings by release id', () => {
+      // find a test release by id after sorting
+      let listingsById = DiscogsService.sortListingsById(allListings);
+      let testID = allListings[0].release.id;
+      expect(listingsById[testID]).toBe(allListings[0]);
     });
 
 });
