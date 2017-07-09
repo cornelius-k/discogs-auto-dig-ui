@@ -86,6 +86,19 @@ class DiscogsService{
     return allListings;
   }
 
+  /**
+   * Organize listings by release ID
+   * @param {Array} listings from Discogs API, seller's inventory
+   * @returns {Object} listings keyed by release ID
+   */
+  static sortListingsById(listings){
+    let releasesById = {};
+    listings.forEach(listing => {
+      releasesById[listing.release.id] =  listing;
+    });
+    return releasesById;
+  }
+
 }
 
 export default DiscogsService;
