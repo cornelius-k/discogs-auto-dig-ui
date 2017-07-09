@@ -43,7 +43,7 @@ describe('Inventory', () => {
 
     // shared between tests
     let testInventorySize = 0;
-    let allListings = 0;
+    let completeListings = [];
 
     // use generator to simulate paginated API responses
     function* createInvResponseGenerator(){
@@ -71,11 +71,12 @@ describe('Inventory', () => {
     })
 
     it('can be retrieved in full for a test user', () => {
-      // check that complete inventory is the correct size
+      // check that complete inventory is the correct size, save set for tests
       return DiscogsService.getCompleteInventory(testUsername)
       .then(allListings => {
         expect(allListings).toBeInstanceOf(Array);
         expect(allListings.length === testInventorySize);
+        completeListings = allListings;
       })
       .catch(err => {
         expect(err).toBeNull();
@@ -84,9 +85,9 @@ describe('Inventory', () => {
 
     it('can organize a set of listings by release id', () => {
       // find a test release by id after sorting
-      let listingsById = DiscogsService.sortListingsById(allListings);
-      let testID = allListings[0].release.id;
-      expect(listingsById[testID]).toBe(allListings[0]);
+      let listingsById = DiscogsService.sortListingsById(completeListings);
+      let testID = completeListings[0].release.id;
+      expect(listingsById[testID]).toBe(completeListings[0]);
     });
 
 });
