@@ -11,3 +11,10 @@ Currently, these features set Discogs-Auto Dig apart from using the Discogs.com 
 
 ## Configuration
 - yarn or npm install
+- create a config.json file containing Discogs API keys and place inside `/src` ex:
+​```
+{
+  "API_KEY" : "XXXXXXXXXXXXXXXXXX",
+  "API_SECRET" : "XXXXXXXXXXXXXXXXXX"
+}
+​```
