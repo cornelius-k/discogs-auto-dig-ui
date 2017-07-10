@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
-import Login from './components/Login.js';
 import SearchBox from './components/SearchBox.js';
 import RecordsList from './components/RecordsList.js';
+import MediaPane from './components/MediaPane.js';
 import DiscogsService from './services/DiscogsService';
+import YoutubeService from './services/YoutubeService';
 require('es6-promise').polyfill();
 /**
  * Main application component
@@ -12,7 +13,7 @@ require('es6-promise').polyfill();
 class App extends Component {
   constructor(){
     super();
-    this.state = {listings: [], loggedIn: false};
+    this.state = {listings: [], loggedIn: false}
   }
 
   componentWillMount(){
@@ -20,30 +21,45 @@ class App extends Component {
 
   update(username){
     // fetch inventory for username
-    DiscogsService.getCompleteInventory(username).then(result => {
+    DiscogsService.retreiveAndSortInventory(username).then(result => {
       this.setState({listings: result});
     }).catch(e =>{
       console.log('error', e)
-    })
+    });
   }
 
   componentDidMount(){
   }
 
-  _onKeyPress(e){
+  Search_onKeyPress(e){
     // trigger update on enter press
     if(e.key === 'Enter') {
       this.update(e.target.value);
     }
   }
 
+  viewRecord(listing){
+    console.log(listing);
+    YoutubeService.getVideoIds(listing.release.id).then((videoIds) => {
+      this.setState({selectedRecord: listing, youtubeIds: videoIds});
+    });
+
+  }
+
   render() {
 
     let mainDisplay = (
       <div>
-        <SearchBox onKeyPress={this._onKeyPress.bind(this)}/>
+        <SearchBox onKeyPress={this.Search_onKeyPress.bind(this)}/>
         <div id="main-left">
-          <RecordsList id="RecordList" records={this.state.listings} />
+          <RecordsList id="RecordList" records={this.state.listings}
+            viewRecord={this.viewRecord.bind(this)} />
+        </div>
+        <div id="main-right">
+          <MediaPane
+            selectedRecord={this.state.selectedRecord}
+            youtubeIds={this.state.youtubeIds}
+          />
         </div>
       </div>
     );

@@ -10,7 +10,6 @@ html {
   margin: 0;
   padding-top: 10px;
   background: #616161;
-  height: 10vw;
 }
 
 #logo pre {
@@ -18,22 +17,19 @@ html {
 }
 
 #SearchBox {
-  height: 6vw;
+  height: 5vw;
   width: 100%;
 }
 
 #SearchBox input {
   width: calc(100% - 5vw);
   border: none;
-  font-size: 2.5vw;
-  -webkit-style:none;
+  font-size: 2vw;
   margin: 0;
   padding: 0;
   margin-left: 5vw;
-  margin-top:7px;
-  height: 4vw;
   color: #616161;
-  margin-top: 1vw;
+  margin-top: 1.3vw;
 }
 
 #SearchBox input:focus{
@@ -41,7 +37,7 @@ html {
 }
 
 ::-webkit-input-placeholder{
-  color: #9c9c9c;
+  color: #d2ffee;
 }
 #SearchBox, #SearchBox input {
   background-color: #7bffcd;
@@ -49,27 +45,83 @@ html {
 
 #RecordsList ul {
   padding:0;
-  margin-top: 35px;
+  margin-top:2vw;
 }
 #RecordsList li {
   list-style-type: none;
   padding-left: 5vw;
   cursor: pointer;
   font-weight: lighter;
-  font-size: 14px;
+  font-size: 1.3vw;
+  position: relative;
+}
+
+#RecordsList .description {
+  width: 30vw;
+  display: block;
 }
 
 #RecordsList li:hover {
   background: yellow;
 }
 
-#main-left{
-  width: 45vw;
+#RecordsList li.active {
+  background: yellow;
+  position: relative;
 }
-
-#Login{
-  width: 100%;
-  height: 100%;
-  background-color: #7bffcd;
-
+#RecordsList li .right-aligned{
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 9vw;
+}
+#RecordsList li .right-aligned i{
+  padding-right: .3vw;
+}
+#RecordsList li .cost{
+  width: 5vw;
+  display: inline-block;
+}
+#RecordsList li .text{
+  color:black;
+}
+#main-left{
+  overflow: hidden;
+  width: 45vw;
+  vertical-align: top;
+  display: inline-block;
+}
+#main-right{
+  vertical-align: top;
+  display: inline-block;
+  width: 55vw;
+}
+#MediaPane {
+}
+#media-content{
+  margin: 2vw;
+}
+#media-content .title{
+  display: block;
+  font-weight: lighter;
+  margin-bottom: 5px;
+}
+#media-content .video{
+  display: block;
+}
+.add-to-cart a{
+  font-size: 5vw;
+  color: black;
+}
+.add-to-cart a:visited{
+  color:black;
+}
+#MediaPane .hint{
+  color: #616161;
+  font-size: 2vw;
+  font-weight: lighter;
+  width: 55vw;
+  margin-top: 30vh;
+  text-align: center;
+  display: block;
 }

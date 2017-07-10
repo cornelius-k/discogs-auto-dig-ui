@@ -99,6 +99,38 @@ class DiscogsService{
     return releasesById;
   }
 
+  /**
+   * Retrieve inventory and sort it
+   * @param {string} username The username for whose inventory you are querying
+   * @param {Array} genres An array of genres that all releases must be tagged with
+   */
+   static async retreiveAndSortInventory(username, genres){
+     let listings = await DiscogsService.getCompleteInventory(username);
+     let listingsById = DiscogsService.sortListingsById(listings);
+     return listingsById;
+   }
+
+   /**
+    * Builds release endpoint URL string
+    * @param {number}  releaseId The release ID
+    * @returns {string} URL for inventory request
+    */
+  static getReleaseURL(releaseId){
+   return `https://api.discogs.com/users/${releaseId}`;
+  }
+
+
+  /**
+   * Retrieve full release information from Discogs API
+   * @param {number} releaseId The release to request info for
+   * @return {Promise.<Object|Error>} Response object containing release information
+   */
+  static async getReleaseData(releaseId){
+    let url = DiscogsService.getReleaseURL(releaseId);
+    let release = await DiscogsService.makeRequest(url);
+    return release;
+  }
+
 }
 
 export default DiscogsService;
