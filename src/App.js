@@ -3,8 +3,10 @@ import './App.css';
 import SearchBox from './components/SearchBox.js';
 import RecordsList from './components/RecordsList.js';
 import MediaPane from './components/MediaPane.js';
+import Logo from './components/Logo.js';
 import DiscogsService from './services/DiscogsService';
 import YoutubeService from './services/YoutubeService';
+import ProgressTracker from './ProgressTracker';
 require('es6-promise').polyfill();
 /**
  * Main application component
@@ -13,15 +15,30 @@ require('es6-promise').polyfill();
 class App extends Component {
   constructor(){
     super();
-    this.state = {listings: [], loggedIn: false}
+    this.state = {
+      listings: [],
+      loggedIn: false,
+      progress: {currentStep: 0, totalSteps: 0, percentage: 100},
+      progressTracker: new ProgressTracker(this.onProgressAdvance.bind(this))
+    }
   }
 
-  componentWillMount(){
+  onProgressAdvance(currentStep, totalSteps){
+    console.log('PROGRESS', currentStep, totalSteps);
+    this.setState({
+      progress: {
+        currentStep: currentStep,
+        totalSteps: totalSteps,
+        percentage: (currentStep / totalSteps) * 100
+      }
+    });
   }
 
   update(username){
     // fetch inventory for username
-    DiscogsService.retreiveAndSortInventory(username).then(result => {
+    let genres = [];
+    DiscogsService.retreiveAndSortInventory(username, genres, this.state.progressTracker)
+    .then(result => {
       this.setState({listings: result});
     }).catch(e =>{
       console.log('error', e)
@@ -50,6 +67,7 @@ class App extends Component {
 
     let mainDisplay = (
       <div>
+        <Logo progressPercentage={this.state.progress.percentage} />
         <SearchBox onKeyPress={this.Search_onKeyPress.bind(this)}/>
         <div id="main-left">
           <RecordsList id="RecordList" records={this.state.listings}
