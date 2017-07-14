@@ -75,7 +75,7 @@ describe('Inventory', () => {
       return DiscogsService.getCompleteInventory(testUsername)
       .then(allListings => {
         expect(allListings).toBeInstanceOf(Array);
-        expect(allListings.length === testInventorySize);
+        expect(allListings.length).toBe(testInventorySize);
         completeListings = allListings;
       })
       .catch(err => {
