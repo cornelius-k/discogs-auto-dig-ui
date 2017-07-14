@@ -69,28 +69,35 @@ class DiscogsService{
    * @param {string} userName The username for whose inventory you are querying
    * @returns {Promise.<Array|Error>} Array of objects detailing a user's inventory
    * @param {ProgressTracker} a ProgressTracker instance to be used to indicate
-   *   the progress of a series of requests
+   * progress
+   * Not a pure function, mutates progress tracker as a side effect
    */
-  static async getCompleteInventory(username, progressTracker){
+  static async getCompleteInventory(username, progressTracker = false){
+
+    const usingProgressTracker = Boolean(progressTracker);
 
     // make request for first page of data
     let url = DiscogsService.getInventoryURLFor(username);
     let firstResponseData = await DiscogsService.makeRequest(url);
     let allListings = firstResponseData.listings;
 
-    // determine max requests to make and set progress tracker
+    // determine max requests to make and set progress tracker if in use
     let totalRequestsToMake = Math.min(firstResponseData.pagination.pages, MAX_PAGES);
-    progressTracker.setTotalSteps(totalRequestsToMake);
-    progressTracker.advance();
+    if(usingProgressTracker){
+      progressTracker.setTotalSteps(totalRequestsToMake);
+      progressTracker.advance();
+    }
 
     let currentResponseData = firstResponseData;
+
     // make a request for each page, save results, and advance tracker each iteration
     while(currentResponseData.pagination.page < totalRequestsToMake){
       let nextPage = currentResponseData.pagination.page + 1;
       let nextUrl = DiscogsService.getInventoryURLFor(username, nextPage)
       currentResponseData = await DiscogsService.makeRequest(nextUrl);
-      allListings = allListings.concat(currentResponseData.listings);
-      progressTracker.advance();
+      allListings = allListings.concat(currentResponseData['listings']);
+      if(usingProgressTracker)
+        progressTracker.advance();
     }
     return allListings;
   }
