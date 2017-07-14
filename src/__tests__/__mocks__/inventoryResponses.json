@@ -1,13 +1,13 @@
 [{
         "pagination": {
             "per_page": 50,
-            "items": 25717,
+            "items": 100,
             "page": 1,
             "urls": {
                 "last": "https://api.discogs.com/users/HandsomeZacksRecords/inventory?per_page=50&page=515",
                 "next": "https://api.discogs.com/users/HandsomeZacksRecords/inventory?per_page=50&page=2"
             },
-            "pages": 515
+            "pages": 2
         },
         "listings": [{
             "status": "For Sale",
