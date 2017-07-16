@@ -105,6 +105,7 @@ html {
   display: block;
   font-weight: lighter;
   margin-bottom: 5px;
+  font-size: 2vw;
 }
 #media-content .video{
   display: block;

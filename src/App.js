@@ -5,7 +5,6 @@ import RecordsList from './components/RecordsList.js';
 import MediaPane from './components/MediaPane.js';
 import Logo from './components/Logo.js';
 import DiscogsService from './services/DiscogsService';
-import YoutubeService from './services/YoutubeService';
 import ProgressTracker from './ProgressTracker';
 require('es6-promise').polyfill();
 /**
