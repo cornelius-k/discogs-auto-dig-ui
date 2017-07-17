@@ -20,6 +20,7 @@ class RecordsList extends React.Component{
     let paddingSize = lineSize - name.length;
 
   }
+  
   render(){
     let records = [];
     // build an array of li elements

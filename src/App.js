@@ -6,12 +6,15 @@ import MediaPane from './components/MediaPane.js';
 import Logo from './components/Logo.js';
 import DiscogsService from './services/DiscogsService';
 import ProgressTracker from './ProgressTracker';
+
 require('es6-promise').polyfill();
+
 /**
  * Main application component
  * responsible for rendering entire UI
  */
 class App extends Component {
+
   constructor(){
     super();
     this.state = {
@@ -22,8 +25,10 @@ class App extends Component {
     }
   }
 
+  // Progress Tracking callback for functions that use a Progress Tracker
   onProgressAdvance(currentStep, totalSteps){
     console.log('PROGRESS', currentStep, totalSteps);
+    // update step state vars
     this.setState({
       progress: {
         currentStep: currentStep,
@@ -33,8 +38,8 @@ class App extends Component {
     });
   }
 
-  update(username){
-    // fetch inventory for username
+  // Get and display a user's inventory
+  searchUsersInventory(username){
     let genres = [];
     DiscogsService.retreiveAndSortInventory(username, genres, this.state.progressTracker)
     .then(result => {
@@ -44,18 +49,17 @@ class App extends Component {
     });
   }
 
-  componentDidMount(){
-  }
-
+  // Handle search keypress event
   Search_onKeyPress(e){
-    // trigger update on enter press
     if(e.key === 'Enter') {
-      this.update(e.target.value);
+      this.searchUsersInventory(e.target.value);
     }
   }
 
+  // Activate a particular listing for display
   viewRecord(listing){
     console.log(listing);
+    // retrieve and set video ids
     YoutubeService.getVideoIds(listing.release.id).then((videoIds) => {
       this.setState({selectedRecord: listing, youtubeIds: videoIds});
     });
@@ -66,18 +70,22 @@ class App extends Component {
 
     let mainDisplay = (
       <div>
+
         <Logo progressPercentage={this.state.progress.percentage} />
         <SearchBox onKeyPress={this.Search_onKeyPress.bind(this)}/>
+
         <div id="main-left">
           <RecordsList id="RecordList" records={this.state.listings}
             viewRecord={this.viewRecord.bind(this)} />
         </div>
+
         <div id="main-right">
           <MediaPane
             selectedRecord={this.state.selectedRecord}
             youtubeIds={this.state.youtubeIds}
           />
         </div>
+
       </div>
     );
 

@@ -4,7 +4,6 @@ const inventoryResponses = require('./__mocks__/inventoryResponses.json');
 
 let testUsername = 'testUser';
 
-
 /**
  * Ensure discogs API is available, requires network
  */
@@ -53,7 +52,6 @@ describe('Inventory', () => {
 
     beforeEach(() => {
       let invResponseGenerator = createInvResponseGenerator();
-
       // redirect outgoing requests to mock data generator
       DiscogsService.makeRequest = async function(){
         return invResponseGenerator.next().value;
