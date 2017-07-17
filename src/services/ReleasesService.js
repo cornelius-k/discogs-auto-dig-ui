@@ -15,8 +15,8 @@ class ReleasesService {
   static async makeRequest(path){
     const url = releasesUrl + path;
     const result = await rp(url);
-    const response = JSON.parse(result);
-    return response;
+    const data = result.Item.data;
+    return JSON.parse(data);
   }
 
   /**
@@ -26,9 +26,8 @@ class ReleasesService {
   */
   static async getRelease(id){
     const path = `?id=${id}`;
-    const response = ReleasesService.makeRequest(path);
-    const data = JSON.parse(response.data);
-    return data;
+    const release = ReleasesService.makeRequest(path);
+    return release;
   }
 
 }
