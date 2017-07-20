@@ -36,7 +36,6 @@ class MediaPane extends React.Component {
             <i className="fa fa-shopping-cart" />
             </a>
           </span>
-          <Youtube className="video" videoId={this.props.youtubeIds[0]} opts={youtubeOpts}/>
         </div>
         );
     else // display hint

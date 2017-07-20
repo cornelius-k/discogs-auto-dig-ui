@@ -58,12 +58,7 @@ class App extends Component {
 
   // Activate a particular listing for display
   viewRecord(listing){
-    console.log(listing);
-    // retrieve and set video ids
-    YoutubeService.getVideoIds(listing.release.id).then((videoIds) => {
-      this.setState({selectedRecord: listing, youtubeIds: videoIds});
-    });
-
+    this.setState({selectedRecord: listing});
   }
 
   render() {
