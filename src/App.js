@@ -6,6 +6,7 @@ import MediaPane from './components/MediaPane.js';
 import Logo from './components/Logo.js';
 import DiscogsService from './services/DiscogsService';
 import ProgressTracker from './ProgressTracker';
+import ReleasesService from './services/ReleasesService';
 
 require('es6-promise').polyfill();
 
@@ -13,6 +14,7 @@ require('es6-promise').polyfill();
  * Main application component
  * responsible for rendering entire UI
  */
+
 class App extends Component {
 
   constructor(){
