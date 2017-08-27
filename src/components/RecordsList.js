@@ -6,11 +6,11 @@ import React, { Component } from 'react';
 class RecordsList extends React.Component{
   constructor(){
     super();
-    this.state = {selectedReleaseId: null};
+    this.state = {selectedListingId: null};
   }
-  _onClick(releaseId, e){
-    this.props.viewRecord(this.props.records[releaseId]);
-    this.setState({selectedReleaseId: releaseId});
+  _onClick(listingId, e){
+    this.props.viewRecord(this.props.records[listingId]);
+    this.setState({selectedListingId: listingId});
   }
 
   // generate display string for a record
@@ -20,23 +20,26 @@ class RecordsList extends React.Component{
     let paddingSize = lineSize - name.length;
 
   }
-  
+
   render(){
     let records = [];
     // build an array of li elements
-    for (let releaseId in this.props.records){
-      let record = this.props.records[releaseId];
+    for (let listingId in this.props.records){
+      let record = this.props.records[listingId];
+      let releaseId = record.release.id;
       let activeClass = '';
-      if (releaseId === this.state.selectedReleaseId){
+
+      // highlight selected record
+      if (listingId === this.state.selectedListingId){
         activeClass = 'active';
       }
 
       if(record.release)
         records.push(
           <li
-          key={releaseId}
+          key={listingId}
           className={activeClass}
-          onClick={this._onClick.bind(this, releaseId)}>
+          onClick={this._onClick.bind(this, listingId)}>
           <span className="description">
             {record.release.description}
           </span>
