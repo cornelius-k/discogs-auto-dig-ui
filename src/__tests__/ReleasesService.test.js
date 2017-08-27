@@ -4,7 +4,7 @@ import ReleasesService from '../services/ReleasesService.js';
 const releasesResponse = require('./__mocks__/releasesResponse.json');
 const releasesUrl = require('../config.json').RELEASES_URL;
 
-const testReleaseId = '3';
+const testReleaseID = '200';
 
 /**
  * Ensure internal releases API is available, requires network
@@ -25,7 +25,7 @@ describe('Releases API', () => {
 
 describe('Releases Service', () => {
 
-  // use mock response
+  // use mock response data for tests
   beforeEach(function(){
     ReleasesService.makeRequest = async function(){
       return JSON.parse(releasesResponse['Item']['data']);
@@ -33,9 +33,9 @@ describe('Releases Service', () => {
   });
 
   it('should retrieve release info for a given release id', () => {
-    ReleasesService.getRelease(testReleaseId)
+    ReleasesService.getRelease(testReleaseID)
     .then(info => {
-      expect(info.id).toBe('3');
+      expect(info.id).toBe(testReleaseID);
     })
     .catch(err => expect(err).toBeNull());
   });

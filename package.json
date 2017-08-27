@@ -6,6 +6,7 @@
     "react-scripts": "1.0.10"
   },
   "dependencies": {
+    "async": "^2.5.0",
     "disconnect": "^1.2.0",
     "fetch-jsonp": "^1.1.1",
     "jest": "^20.0.4",

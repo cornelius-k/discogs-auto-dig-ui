@@ -4,6 +4,7 @@
 */
 const rp = require('request-promise');
 const releasesUrl = require('../config.json').RELEASES_URL;
+const request = require('request');
 
 class ReleasesService {
 
@@ -14,9 +15,9 @@ class ReleasesService {
   */
   static async makeRequest(path){
     const url = releasesUrl + path;
-    const result = await rp(url);
-    const data = result.Item.data;
-    return JSON.parse(data);
+    const strResponse = await rp(url);
+    const response = JSON.parse(strResponse);
+    return response;
   }
 
   /**
@@ -26,7 +27,7 @@ class ReleasesService {
   */
   static async getRelease(id){
     const path = `?id=${id}`;
-    const release = ReleasesService.makeRequest(path);
+    const release = await ReleasesService.makeRequest(path);
     return release;
   }
 
