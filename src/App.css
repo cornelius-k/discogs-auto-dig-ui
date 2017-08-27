@@ -10,6 +10,7 @@ html {
   margin: 0;
   padding-top: 10px;
   background: #616161;
+  padding-bottom: 10px;
 }
 
 #logo pre {
@@ -17,19 +18,19 @@ html {
 }
 
 #SearchBox {
-  height: 5vw;
+  height: 3vw;
   width: 100%;
 }
 
 #SearchBox input {
   width: calc(100% - 5vw);
   border: none;
-  font-size: 2vw;
+  font-size: 1.5vw;
   margin: 0;
   padding: 0;
   margin-left: 5vw;
   color: #616161;
-  margin-top: 1.3vw;
+  margin-top: .3vw;
 }
 
 #SearchBox input:focus{
@@ -87,16 +88,21 @@ html {
 }
 #main-left{
   overflow: hidden;
-  width: 45vw;
+  width: 44vw;
   vertical-align: top;
   display: inline-block;
 }
 #main-right{
   vertical-align: top;
   display: inline-block;
-  width: 55vw;
+  width: 50vw;
 }
 #MediaPane {
+}
+.youtube-vids span{
+  height: 23vw;
+  padding-bottom: 2vh;
+  display: block;
 }
 #media-content{
   margin: 2vw;
