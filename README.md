@@ -41,7 +41,7 @@ Run tests with `yarn test`
 - [ ] By default sort listings by a combined most wants and lowest price
 - [ ] Display correct number of wants for listings in inventory
 - [ ] Display price, record label, and full release info in media pane for a selected listing
-- [ ] Display all youtube videos for a the selected listing in the media pane
+- [x] Display all youtube videos for a the selected listing in the media pane
 - [ ] Hide youtube videos but allow playback control
 - [ ] Add pagination of inventory listings
 - [ ] Add genre filtering
@@ -49,4 +49,3 @@ Run tests with `yarn test`
 - [ ] Display a breakdown of record labels in a seller's inventory
 - [ ] Allow quick focusing of all records belonging to a particular label
 - [ ] Introduce auto-playthrough feature where all listings are played through as a playlist one by one
-- [ ] Deploy to discogsautodig.com production Website
