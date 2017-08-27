@@ -122,7 +122,7 @@ class DiscogsService{
    * @param {ProgressTracker} a ProgressTracker instance to be used to indicate
    *   the progress of a series of requests
    */
-   static async retreiveAndSortInventory(username, genres, progressTracker){
+   static async retreiveAndSortInventory(username, progressTracker){
      let listings = await DiscogsService.getCompleteInventory(username, progressTracker);
      let listingsById = DiscogsService.sortListingsById(listings);
      return listingsById;
