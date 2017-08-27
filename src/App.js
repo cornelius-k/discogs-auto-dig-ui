@@ -7,6 +7,8 @@ import Logo from './components/Logo.js';
 import DiscogsService from './services/DiscogsService';
 import ProgressTracker from './ProgressTracker';
 import ReleasesService from './services/ReleasesService';
+import Youtube from 'react-youtube';
+
 
 require('es6-promise').polyfill();
 
@@ -41,26 +43,71 @@ class App extends Component {
   }
 
   // Get and display a user's inventory
-  searchUsersInventory(username){
-    let genres = [];
-    DiscogsService.retreiveAndSortInventory(username, genres, this.state.progressTracker)
-    .then(result => {
-      this.setState({listings: result});
+  getSellerInventory(username){
+    let app = this;
+    DiscogsService.getCompleteInventory(username, this.state.progressTracker)
+    .then(listings => {
+      let listingsById = DiscogsService.sortListingsById(listings);
+      fetchReleaseData(listings).then(listings => {
+        app.setState({listings: listingsById});
+      });
     }).catch(e =>{
       console.log('error', e)
     });
+
+    function fetchReleaseData(listings){
+      // fetch complete release data for every listing
+      let releasesRequests = listings.map(function(listing){
+        return ReleasesService.getRelease(listing.release.id).then(completeReleaseData => {
+          Object.assign(listing.release, completeReleaseData);
+        });
+      });
+      // resolve when all completed
+      return Promise.all(releasesRequests);
+    }
   }
 
   // Handle search keypress event
   Search_onKeyPress(e){
     if(e.key === 'Enter') {
-      this.searchUsersInventory(e.target.value);
+      this.getSellerInventory(e.target.value);
     }
   }
 
   // Activate a particular listing for display
   viewRecord(listing){
     this.setState({selectedRecord: listing});
+  }
+
+  // Parse a listing and generate an array of youtube video components
+  getYoutubeVideos(record, opts){
+     const app = this;
+     let videos = [];
+     if(record.release.videos){
+       try{
+         return record.release.videos.map(function(videoData){
+           let videoUrl = videoData.src || videoData.uri;
+           let videoId = app.parseYoutubeId(videoUrl);
+           return <Youtube key={videoId} videoId={videoId} opts={opts}/>
+         });
+       }catch(exception){
+         console.error("Error parsing youtube videos for record", exception);
+       }
+     }
+    return videos;
+  }
+
+  // parse youtube video id from a url string
+  parseYoutubeId(url){
+    let videoId;
+    let idPosition = url.indexOf('v=');
+    if(idPosition !== -1) {
+      videoId = url.slice(idPosition + 2);
+    }else{
+      console.error("Error parsing video id for video url: ", url);
+      videoId = "dQw4w9WgXcQ"; // rickroll
+    }
+    return videoId;
   }
 
   render() {
@@ -80,6 +127,7 @@ class App extends Component {
           <MediaPane
             selectedRecord={this.state.selectedRecord}
             youtubeIds={this.state.youtubeIds}
+            getYoutubeVideos={this.getYoutubeVideos.bind(this)}
           />
         </div>
 
