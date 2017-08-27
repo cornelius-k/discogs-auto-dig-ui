@@ -17,8 +17,7 @@ class ReleasesService {
     const url = releasesUrl + path;
     const strResponse = await rp(url);
     const response = JSON.parse(strResponse);
-    const data = response['Item']['data'];
-    return JSON.parse(data);
+    return response;
   }
 
   /**
@@ -27,36 +26,11 @@ class ReleasesService {
   * @returns {object|Error} An object containing the information for a release
   */
   static async getRelease(id){
-    const path = `?id=${3}`;
-    const release = ReleasesService.makeRequest(path);
+    const path = `?id=${id}`;
+    const release = await ReleasesService.makeRequest(path);
     return release;
   }
 
-  // /**
-  // * Get youtube video ids for a release with a given id
-  // * @param {string} releaseId Release ID
-  // * @returns {array} An array of youtube video IDs
-  // */
-  // static async getYoutubeVideos(releaseId){
-  //   const release = await ReleasesService.getRelease(releaseId);
-  //   const videos = release.videos;
-  //   const videos = videos.map( video => {
-  //     {
-  //       id : getIdFromYoutubeURL(video.),
-  //       title : v
-  //   })
-  //   return ids;
-  // }
-  //
-  // // adapted from answer post by Jacob Relkin on Stack Overflow
-  // function getIdFromYoutubeURL(url){
-  //   let youtubeID = window.location.search.split('v=')[1];
-  //   const ampersandPosition = youtubeID.indexOf('&');
-  //   if(ampersandPosition != -1) {
-  //     youtubeID = youtubeID.substring(0, ampersandPosition);
-  //   }
-  //   return youtubeID;
-  // }
 }
 
 export default ReleasesService;
