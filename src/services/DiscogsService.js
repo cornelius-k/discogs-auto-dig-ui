@@ -4,7 +4,7 @@
 */
 const fetchJsonp = require('fetch-jsonp');
 const rp = require('request-promise');
-const config = require('../config.json');
+const config = require('../config');
 
 // Discogs API pagination maximum number of results per page
 const MAX_PER_PAGE = 100;

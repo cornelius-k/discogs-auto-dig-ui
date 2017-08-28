@@ -3,7 +3,7 @@
 * Fetches release data from internal Releases API
 */
 const rp = require('request-promise');
-const releasesUrl = require('../config.json').RELEASES_URL;
+const releasesUrl = require('../config').RELEASES_URL;
 const request = require('request');
 
 class ReleasesService {
