@@ -110,19 +110,13 @@ html {
 #media-content .title{
   display: block;
   font-weight: lighter;
-  margin-bottom: 5px;
-  font-size: 2vw;
+  margin-bottom: 10px;
+  font-size: 2.3vw;
 }
 #media-content .video{
   display: block;
 }
-.add-to-cart a{
-  font-size: 5vw;
-  color: black;
-}
-.add-to-cart a:visited{
-  color:black;
-}
+
 #MediaPane .hint{
   color: #616161;
   font-size: 2vw;
@@ -131,4 +125,81 @@ html {
   margin-top: 30vh;
   text-align: center;
   display: block;
+}
+
+.album-art-container{
+  width: 40%;
+  display: inline-block;
+  vertical-align: top;
+}
+.record-details-container{
+  display: inline-block;
+  width: 56%;
+  padding-left: 3%;
+}
+.price-line{
+  display: block;
+  margin-top: 10px;
+  margin-bottom: .5vw;
+
+}
+.price-dots{
+  letter-spacing: 1px;
+  font-size:10px;
+  color: white;
+  border-bottom: 1px dotted #696969;
+  width: 16.3vw;
+  margin-right: .3vw;
+  display: inline-block;
+}
+.price-main-display{
+  font-size:2vw;
+}
+.album-art{
+  width: 100%;
+  margin-right: 5%;
+}
+.format, .condition{
+  color: #4d4949;
+  font-weight: lighter;
+  font-size: 1.2vw;
+  margin-right: .2vw;
+  display: inline-block;
+}
+.condition{
+  color:#7d7d7d;
+  font-size:1vw;
+}
+.add-to-cart{
+  vertical-align: sub;
+}
+.add-to-cart a{
+  font-size: 2vw;
+  color: black;
+  margin-left: .5vw;
+}
+.add-to-cart a:visited{
+  color:black;
+}
+.add-to-cart a:hover{
+  color:gray;
+  cursor: pointer;
+}
+.format{
+  font-size:1.3vw;
+}
+.year-genre{
+  font-weight: lighter;
+  font-size: 2vw;
+  border-top: 1px solid black;
+  padding-top: 10px;
+  margin-top: .5vw;
+}
+.condition-line{
+  display: block;
+}
+.comments{
+  font-weight: lighter;
+  font-size: 1vw;
+  color: #000000;
 }
