@@ -1,10 +1,13 @@
 # Discogs Auto-Dig UI
 This is the client-side React code for the Discogs Auto-Dig tool. This project aims to create a web ui that enables users to more easily find good\* music and buy used media on the Discogs.com marketplace.  This is currently a work in progress and not production-ready, but read the todo to see a list of features to come.
 
-<sub>*\*What is good music is probably highly subjective but one idea is that records with a high number of "wants" might be more worth the user's attention.*</sub>
+<sub>*\*Whats good music is probably highly subjective but one idea is that records with a high number of "wants" could be more worth a listen.*</sub>
 
 Here is a recent screenshot. (WIP)
-![Screenshot](public/screenshot-7-20.png)
+![Screenshot](public/screenshot-8-28.png)
+
+### Live Demo
+Check it out here on [heroku](http://discogs-auto-dig.herokuapp.com)
 
 
 ### Requirements
@@ -43,6 +46,7 @@ Run tests with `yarn test`
 - [ ] Display price, record label, and full release info in media pane for a selected listing
 - [x] Display all youtube videos for a the selected listing in the media pane
 - [ ] Hide youtube videos but allow playback control
+- [ ] Display all youtube videos for a the selected listing in the media pane
 - [ ] Add pagination of inventory listings
 - [ ] Add genre filtering
 - [ ] Cache full inventory requests for one day, either per-user or server side
