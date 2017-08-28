@@ -18,19 +18,19 @@ html {
 }
 
 #SearchBox {
-  height: 3vw;
+  height: 3.5vw;
   width: 100%;
 }
 
 #SearchBox input {
   width: calc(100% - 5vw);
   border: none;
-  font-size: 1.5vw;
+  font-size: 2vw;
   margin: 0;
   padding: 0;
   margin-left: 5vw;
   color: #616161;
-  margin-top: .3vw;
+  margin-top: .5vw;
 }
 
 #SearchBox input:focus{

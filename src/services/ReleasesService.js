@@ -17,7 +17,7 @@ class ReleasesService {
     const url = releasesUrl + path;
     const strResponse = await rp(url);
     const response = JSON.parse(strResponse);
-    return response;
+    return response.data;
   }
 
   /**

@@ -58,6 +58,7 @@ class App extends Component {
     function fetchReleaseData(listings){
       // fetch complete release data for every listing
       let releasesRequests = listings.map(function(listing){
+        console.log(listing);
         return ReleasesService.getRelease(listing.release.id).then(completeReleaseData => {
           Object.assign(listing.release, completeReleaseData);
         });
@@ -85,7 +86,8 @@ class App extends Component {
      let videos = [];
      if(record.release.videos){
        try{
-         return record.release.videos.map(function(videoData){
+         let videos = record.release.videos.video || record.release.videos;
+         return videos.map(function(videoData){
            let videoUrl = videoData.src || videoData.uri;
            let videoId = app.parseYoutubeId(videoUrl);
            return <Youtube key={videoId} videoId={videoId} opts={opts}/>
@@ -93,6 +95,8 @@ class App extends Component {
        }catch(exception){
          console.error("Error parsing youtube videos for record", exception);
        }
+     }else{
+       console.error("Videos missing for ", record);
      }
     return videos;
   }
@@ -103,6 +107,7 @@ class App extends Component {
     let idPosition = url.indexOf('v=');
     if(idPosition !== -1) {
       videoId = url.slice(idPosition + 2);
+      console.log(videoId);
     }else{
       console.error("Error parsing video id for video url: ", url);
       videoId = "dQw4w9WgXcQ"; // rickroll
